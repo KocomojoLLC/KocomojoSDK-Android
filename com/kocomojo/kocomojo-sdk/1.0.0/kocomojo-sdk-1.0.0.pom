@@ -8,15 +8,15 @@
   <packaging>aar</packaging>
   <dependencies>
     <dependency>
-      <groupId>EspyIt</groupId>
+      <groupId>com.devfd</groupId>
       <artifactId>react-native-geocoder</artifactId>
-      <version>unspecified</version>
+      <version>+</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>EspyIt</groupId>
+      <groupId>com.learnium</groupId>
       <artifactId>react-native-device-info</artifactId>
-      <version>unspecified</version>
+      <version>+</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
