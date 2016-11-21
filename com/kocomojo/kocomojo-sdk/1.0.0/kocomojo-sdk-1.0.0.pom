@@ -31,5 +31,18 @@
       <version>0.34.1</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.estimote</groupId>
+      <artifactId>sdk</artifactId>
+      <version>0.13.0</version>
+      <type>aar</type>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>*</artifactId>
+          <groupId>*</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
 </project>
