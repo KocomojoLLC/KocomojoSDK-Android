@@ -32,6 +32,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.microsoft.codepush.react</groupId>
+      <artifactId>code-push</artifactId>
+      <version>+</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.android.support</groupId>
       <artifactId>appcompat-v7</artifactId>
       <version>23.0.1</version>
