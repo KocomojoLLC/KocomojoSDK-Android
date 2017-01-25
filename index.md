@@ -114,13 +114,10 @@ KocomojoSDK.getInstance()
 
 You change the frequency of push notifications - how many seconds will need to pass after a push notification for another one to occur.  (Any notifications that would occur during this time is ignored as to not overwhelm the client.)  This defaults to 60 &#42; 60 &#42; 2 = 3600, or 2 hours.
 
-<div class="objc">
-<pre class="hljs"><code>[[KocomojoSDK sharedInstance]setMinimumSecondsBetweenPushNotifications:[NSNumber numberWithInteger: 3600]];</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>KocomojoSDK.sharedInstance().minimumSecondsBetweenPushNotifications = 3600</code></pre>
-</div>
+```java 
+KocomojoSDK.getInstance()
+  .setMinimumSecondsBetweenPushNotifications();
+```
 
 &nbsp;
 
@@ -130,15 +127,11 @@ There are 2 templates that can be customized by the client.  One is for `pushTem
 
 They can be assigned like:
 
-<div class="objc">
-<pre class="hljs"><code>[[KocomojoSDK sharedInstance] setPushTemplateSingular:@"An awesome experience __NAME__ has just entered your sphere"];
-[[KocomojoSDK sharedInstance] setPushTemplatePlural:@"__NAMES__ are all available!!!"];</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>KocomojoSDK.sharedInstance().pushTemplateSingular = "An awesome experience __NAME__ has just entered your sphere";
-KocomojoSDK.sharedInstance().pushTemplatePlural = "__NAMES__ are all available!!!";</code></pre>
-</div>
+```java 
+KocomojoSDK.getInstance()
+  .setPushTemplateSingular("An awesome experience __NAME__ has just entered your sphere")
+  .setPushTemplatePlural("__NAMES__ are all available!");
+```
 
 &nbsp;
 
