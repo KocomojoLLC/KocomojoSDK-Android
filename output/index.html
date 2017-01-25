@@ -16,6 +16,7 @@
     <li class="sidebar-header-2"><a href="#installation">Installation</a></li>
     <li class="sidebar-header-3"><a href="#repositories">Repositories</a></li>
     <li class="sidebar-header-3"><a href="#dependencies">Dependencies</a></li>
+    <li class="sidebar-header-3"><a href="#32-bit">32-Bit</a></li>
     <li class="sidebar-header-2"><a href="#implementation">Implementation</a></li>
     <li class="sidebar-header-3"><a href="#api-key-validation">API Key validation</a></li>
     <li class="sidebar-header-3"><a href="#auto-show-experiences">Auto Show Experiences</a></li>
@@ -46,7 +47,17 @@
   compile <span class="hljs-string">'com.kocomojo:kocomojo-sdk:0.9.822'</span>
 }</code></pre><p>Then simply run <code>gradle</code> to install KocomojoSDK into your project.  </p>
 <p>&nbsp;</p>
-<h2 id="implementation"><a class="header-link" href="#implementation"></a>Implementation</h2>
+<h3 id="32-bit"><a class="header-link" href="#32-bit"></a>32-Bit</h3>
+<p>Currently KocomojoSDK only supports 32-bit libraries.  To ensure compatibility, you&#39;ll need to ensure it only uses 32-bit libraries: </p>
+<pre class="hljs"><code>android {
+  ...
+  defaultConfig {
+    ...
+    ndk {
+        abiFilters <span class="hljs-string">"armeabi-v7a"</span>, <span class="hljs-string">"x86"</span>
+    }
+  }
+}</code></pre><h2 id="implementation"><a class="header-link" href="#implementation"></a>Implementation</h2>
 <p>Import <code>KocomojoSDK</code> into your <code>MainApplication.java</code>:</p>
 <p><code>import com.kocomojo.KocomojoSDK;</code></p>
 <p>Add these lines to <code>onCreate()</code>: </p>

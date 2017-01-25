@@ -30,6 +30,22 @@ Then simply run `gradle` to install KocomojoSDK into your project.
 
 &nbsp;
 
+### 32-Bit 
+
+Currently KocomojoSDK only supports 32-bit libraries.  To ensure compatibility, you'll need to ensure it only uses 32-bit libraries: 
+
+```ruby
+android {
+  ...
+  defaultConfig {
+    ...
+    ndk {
+        abiFilters "armeabi-v7a", "x86"
+    }
+  }
+}
+```
+
 ## Implementation 
 
 Import `KocomojoSDK` into your `MainApplication.java`:
