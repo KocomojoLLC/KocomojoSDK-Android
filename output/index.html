@@ -20,16 +20,15 @@
     <li class="sidebar-header-3"><a href="#api-key-validation">API Key validation</a></li>
     <li class="sidebar-header-3"><a href="#auto-show-experiences">Auto Show Experiences</a></li>
     <li class="sidebar-header-2"><a href="#adding-the-button">Adding the Button</a></li>
+    <li class="sidebar-header-2"><a href="#location-permissions">Location Permissions</a></li>
     <li class="sidebar-header-2"><a href="#local-push-notifications">Local Push Notifications</a></li>
     <li class="sidebar-header-3"><a href="#frequency">Frequency</a></li>
     <li class="sidebar-header-3"><a href="#push-templates">Push Templates</a></li>
-    <li class="sidebar-header-3"><a href="#open-app-from-push">Open app from Push</a></li>
-    <li class="sidebar-header-2"><a href="#notifications">Notifications</a></li>
-    <li class="sidebar-header-3"><a href="#button-touched">Button Touched</a></li>
-    <li class="sidebar-header-3"><a href="#button-enabled">Button Enabled</a></li>
-    <li class="sidebar-header-3"><a href="#full-screen-view-closed">Full Screen View Closed</a></li>
-    <li class="sidebar-header-3"><a href="#experiences-in-range">Experiences In Range</a></li>
-    <li class="sidebar-header-3"><a href="#bluetooth-off">Bluetooth Off</a></li>
+    <li class="sidebar-header-2"><a href="#notification-listener">Notification Listener</a></li>
+    <li class="sidebar-header-3"><a href="#onbuttontouched">onButtonTouched</a></li>
+    <li class="sidebar-header-3"><a href="#onbuttonenabled">onButtonEnabled</a></li>
+    <li class="sidebar-header-3"><a href="#onexperiencesinrange">onExperiencesInRange</a></li>
+    <li class="sidebar-header-3"><a href="#onbluetoothdisabled">onBluetoothDisabled</a></li>
 </ul>        </div>
       </div>
       <div class="col-xs-9 main"><h1 id="kocomojosdk-for-android"><a class="header-link" href="#kocomojosdk-for-android"></a>KocomojoSDK for Android</h1>
@@ -77,7 +76,12 @@ KocomojoSDK
 an enabled and disabled image to it: </p>
 <pre class="hljs"><code>KocomojoSDK.getInstance()
   .setDisabledImageName(<span class="hljs-string">"button_disabled"</span>)
-  .setEnabledImageName(<span class="hljs-string">"button_enabled"</span>);</code></pre><p>&nbsp;</p>
+  .setEnabledImageName(<span class="hljs-string">"button_enabled"</span>);</code></pre><h2 id="location-permissions"><a class="header-link" href="#location-permissions"></a>Location Permissions</h2>
+<p>Add this line to let KocomjoSDK know the results of it asking for permission to access location in the activity that contains the button: </p>
+<pre class="hljs"><code><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onRequestPermissionsResult</span><span class="hljs-params">(<span class="hljs-keyword">int</span> requestCode, String[] permissions, <span class="hljs-keyword">int</span>[] grantResults)</span> </span>{
+  KocomojoSDK.onRequestPermissionsResult(requestCode, permissions, grantResults);
+}</code></pre><p>&nbsp;</p>
 <h2 id="local-push-notifications"><a class="header-link" href="#local-push-notifications"></a>Local Push Notifications</h2>
 <p>You can have KocomojoSDK send Push Notifications whenever an Experiences comes in range. </p>
 <p>To enable this:</p>
@@ -86,205 +90,45 @@ an enabled and disabled image to it: </p>
   .setShowPushNotifications(<span class="hljs-keyword">true</span>);</code></pre><p>&nbsp;</p>
 <h3 id="frequency"><a class="header-link" href="#frequency"></a>Frequency</h3>
 <p>You change the frequency of push notifications - how many seconds will need to pass after a push notification for another one to occur.  (Any notifications that would occur during this time is ignored as to not overwhelm the client.)  This defaults to 60 &#42; 60 &#42; 2 = 3600, or 2 hours.</p>
-<div class="objc">
-<pre class="hljs"><code>[[KocomojoSDK sharedInstance]setMinimumSecondsBetweenPushNotifications:[NSNumber numberWithInteger: 3600]];</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>KocomojoSDK.sharedInstance().minimumSecondsBetweenPushNotifications = 3600</code></pre>
-</div>
-
-<p>&nbsp;</p>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setMinimumSecondsBetweenPushNotifications();</code></pre><p>&nbsp;</p>
 <h3 id="push-templates"><a class="header-link" href="#push-templates"></a>Push Templates</h3>
 <p>There are 2 templates that can be customized by the client.  One is for <code>pushTemplateSingular</code> (when there&#39;s one Experience in range) and the other is <code>pushTemplatePlural</code> (when there&#39;s more than one Experience in range.)</p>
 <p>They can be assigned like:</p>
-<div class="objc">
-<pre class="hljs"><code>[[KocomojoSDK sharedInstance] setPushTemplateSingular:@&quot;An awesome experience <strong>NAME</strong> has just entered your sphere&quot;];
-[[KocomojoSDK sharedInstance] setPushTemplatePlural:@&quot;<strong>NAMES</strong> are all available!!!&quot;];</code></pre>
-</div>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setPushTemplateSingular(<span class="hljs-string">"An awesome experience __NAME__ has just entered your sphere"</span>)
+  .setPushTemplatePlural(<span class="hljs-string">"__NAMES__ are all available!"</span>);</code></pre><p>&nbsp;</p>
+<h2 id="notification-listener"><a class="header-link" href="#notification-listener"></a>Notification Listener</h2>
+<pre class="hljs"><code>KocomjoSDK.getInstance()
+  .setNotificationListener(<span class="hljs-keyword">new</span> KocomojoSDK.NotificationListener() {
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onButtonEnabled</span><span class="hljs-params">(Boolean isEnabled)</span> </span>{
+          Log.d(<span class="hljs-string">"MainApplication"</span>, <span class="hljs-string">"Button enabled? "</span> + isEnabled.toString());
+      }
 
-<div class="swift">
-<pre class="hljs"><code>KocomojoSDK.sharedInstance().pushTemplateSingular = &quot;An awesome experience <strong>NAME</strong> has just entered your sphere&quot;;
-KocomojoSDK.sharedInstance().pushTemplatePlural = &quot;<strong>NAMES</strong> are all available!!!&quot;;</code></pre>
-</div>
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onButtonTouched</span><span class="hljs-params">()</span> </span>{
+          Log.d(<span class="hljs-string">"MainApplication"</span>, <span class="hljs-string">"Button Touched!"</span>);
+      }
 
-<p>&nbsp;</p>
-<h3 id="open-app-from-push"><a class="header-link" href="#open-app-from-push"></a>Open app from Push</h3>
-<div class="objc">
-<p>When the user opens a local push notification generated by the SDK, you can have it automatically &quot;touch&quot; the button for them by implementing the following:</p>
-<pre class="hljs"><code>- (void)application:(UIApplication &#42;)application didReceiveLocalNotification:(UILocalNotification &#42;)notification
-{
-  [[KocomojoSDK sharedInstance] didReceiveLocalNotification:notification];
-}</code></pre>
-</div>
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onExperiencesInRange</span><span class="hljs-params">(ArrayList experiencesList)</span> </span>{
+          Log.d(<span class="hljs-string">"MainApplication"</span>, <span class="hljs-string">"Experiences in range "</span> + experiencesList.toString());
+      }
 
-<div class="swift">
-<p>When the user opens a local push notification generated by the SDK, you can have it automatically &quot;touch&quot; the button for them by implementing the following:</p>
-<pre class="hljs"><code>func application(_ application: UIApplication, didReceive notification: UILocalNotification)
-{
-  KocomojoSDK.sharedInstance().didReceive(notification);
-}</code></pre>
-</div>
-
-
-
-<p>Note that if you want to generate your own Push Notifications using the names of the experiences as they come into range, you can implement a listener for <code>KocomojoExperiencesInRangeNotification</code> (more information in the next section)</p>
-<p>&nbsp;</p>
-<h2 id="notifications"><a class="header-link" href="#notifications"></a>Notifications</h2>
-<p>&nbsp;</p>
-<div class="objc">
-<p>Button Touched (<code>KocomojoButtonTouchedNotification</code>)</p>
-<p>Button Enabled (<code>KocomojoButtonEnabledNotification</code>)</p>
-<p>Full Screen View Closed (<code>KocomojoFullScreenViewClosedNotification</code>)</p>
-<p>Experiences In Range (<code>KocomojoExperiencesInRangeNotification</code>)</p>
-<p>Bluetooth Disabled (<code>KocomojoBluetoothDisabledNotification</code>)</p>
-</div>
-
-<div class="swift">
-<p>Button Touched (<code>Notification.Name.KocomojoButtonTouched</code>)</p>
-<p>Button Enabled (<code>Notification.Name.KocomojoButtonEnabled</code>)</p>
-<p>Full Screen View Closed (<code>Notification.Name.KocomojoFullScreenViewClosed</code>)</p>
-<p>Experiences In Range (<code>Notification.Name..KocomojoExperiencesInRange</code>)</p>
-<p>Bluetooth Disabled (<code>Notification.Name.KocomojoBluetoothDisabled</code>)</p>
-</div>
-
-<p>&nbsp;</p>
-<h3 id="button-touched"><a class="header-link" href="#button-touched"></a>Button Touched</h3>
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onBluetoothDisabled</span><span class="hljs-params">()</span> </span>{
+          Log.d(<span class="hljs-string">"MainApplication"</span>, <span class="hljs-string">"Bluetooth Disabled!"</span>);
+      }
+})</code></pre><p> &nbsp;</p>
+<h3 id="onbuttontouched"><a class="header-link" href="#onbuttontouched"></a>onButtonTouched</h3>
 <p>This simply tells when the button is touched, whether or not it is enabled.  </p>
-<div class="objc">
-<pre class="hljs"><code>[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(buttonTouched:) name:KocomojoButtonTouchedNotification object:nil];
-
-...
-
-- (void)buttonTouched:(NSNotification &#42;)notification {
-  NSLog(@&quot;Button Touched!&quot;);
-}
-</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>NotificationCenter.default.addObserver(self, selector: #selector(self.buttonTouched), name: Notification.Name.KocomojoButtonTouched, object: nil);
-
-...
-
-func buttonTouched(notification: Notification) {
-    NSLog(&quot;Button Touched!&quot;);
-}
-</code></pre>
-</div>
-
-<p>&nbsp;</p>
-<h3 id="button-enabled"><a class="header-link" href="#button-enabled"></a>Button Enabled</h3>
-<p>This is called when the button is either enabled or disabled.  The <code>NSDictionary</code> in the <code>notification.object</code> contains <code>enabled</code>. </p>
-<div class="objc">
-<pre class="hljs"><code>[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(buttonEnabled:) name:KocomojoButtonEnabledNotification object:nil];
-
-...
-
-- (void)buttonEnabled:(NSNotification &#42;)notification {
-  NSDictionary &#42;notificationDic = notification.object;
-
-  if([notificationDic[@&quot;enabled&quot;]boolValue] == YES) {
-    NSLog(@&quot;Enabled!!&quot;);
-  } else {
-    NSLog(@&quot;Disabled!!&quot;);
-  }
-}
-</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>NotificationCenter.default.addObserver(self, selector: #selector(self.buttonEnabled), name: Notification.Name.KocomojoButtonEnabled, object: nil);
-
-...
-
-func buttonEnabled(notification: Notification) {
-    let notificationDic = notification.object as! NSDictionary;
-    let enabledNum = notificationDic[&quot;enabled&quot;] as! NSNumber;
-
-    if(enabledNum.boolValue) {
-      NSLog(&quot;Enabled!&quot;);
-    } else {
-      NSLog(&quot;Disabled!&quot;);
-    }
-}
-</code></pre>
-</div>
-
-
-<p>&nbsp;</p>
-<h3 id="full-screen-view-closed"><a class="header-link" href="#full-screen-view-closed"></a>Full Screen View Closed</h3>
-<p>This is called when the full screen view is closed.</p>
-<div class="objc">
-<pre class="hljs"><code>[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fullScreenViewClosed:) name:KocomojoFullScreenViewClosedNotification object:nil];
-
-...
-
-- (void)fullScreenViewClosed:(NSNotification &#42;)notification {
-  NSLog(@&quot;Full Screen View Closed&quot;);
-}</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>NotificationCenter.default.addObserver(self, selector: #selector(self.fullScreenViewClosed), name: Notification.Name.KocomojoFullScreenViewClosed, object: nil);
-
-...
-
-func fullScreenViewClosed(notification: Notification) {
-  NSLog(@&quot;Full Screen View Closed&quot;);
-}</code></pre>
-</div>
-
-<p>&nbsp;</p>
-<h3 id="experiences-in-range"><a class="header-link" href="#experiences-in-range"></a>Experiences In Range</h3>
-<p>When experiences come in range (or go out of range) this will be posted.  The <code>notification.data</code> will be an array containing <code>id</code>, <code>name</code>, and <code>inRange</code> (true or false) of each experience.  </p>
-<p>One thing to note is that this will only be posted with experiences who&#39;s <code>inRange</code> status changes.  Once an experiences comes <code>inRange</code>, the only other time it will appears in the <code>notification.data</code> array is when <code>inRange</code> becomes false.  </p>
-<div class="objc">
-<pre class="hljs"><code>[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(experiencesInRange:) name:KocomojoExperiencesInRangeNotification object:nil];
-
-...
-
-- (void)experiencesInRange:(NSNotification &#42;)notification {
-  NSArray &#42;experiencesInRangeArray = notification.object;
-
-  NSLog(@&quot;Experiences In Range: %@&quot;, experiencesInRangeArray);
-}</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>NotificationCenter.default.addObserver(self, selector: #selector(self.experiencesInRange), name: Notification.Name.KocomojoExperiencesInRange, object: nil);
-
-...
-
-func experiencesInRange(notification: Notification) {
-  let experiencesInRangeArray = notification.object as! NSArray;
-
-  NSLog(&quot;Experiences In Range: %@&quot;, experiencesInRangeArray);
-}</code></pre>
-</div>
-
-<p>&nbsp;</p>
-<h3 id="bluetooth-off"><a class="header-link" href="#bluetooth-off"></a>Bluetooth Off</h3>
+<h3 id="onbuttonenabled"><a class="header-link" href="#onbuttonenabled"></a>onButtonEnabled</h3>
+<p>This is called when the button is either enabled or disabled.</p>
+<h3 id="onexperiencesinrange"><a class="header-link" href="#onexperiencesinrange"></a>onExperiencesInRange</h3>
+<p>When experiences come in range (or go out of range) this will be posted.</p>
+<h3 id="onbluetoothdisabled"><a class="header-link" href="#onbluetoothdisabled"></a>onBluetoothDisabled</h3>
 <p>This is called if the user launches the app with Bluetooth disabled, or if they disable Bluetooth while in the app.</p>
-<div class="objc">
-<pre class="hljs"><code>[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(bluetoothDisabled:) name:KocomojoBluetoothDisabledNotification object:nil];
-
-...
-
-- (void)bluetoothDisabled:(NSNotification &#42;)notification {
-  // Notify the user to turn Bluetooth on
-}</code></pre>
-</div>
-
-<div class="swift">
-<pre class="hljs"><code>NotificationCenter.default.addObserver(self, selector: #selector(self.bluetoothDisabled), name: Notification.Name.KocomojoBluetoothDisabled, object: nil);
-
-...
-
-func bluetoothDisabled(notification: Notification) {
-  // Notify the user to turn Bluetooth on
-}</code></pre>
-</div>
       </div>
     </div>
   </div>
