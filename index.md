@@ -69,9 +69,19 @@ KocomojoSDK
 
 You can validate your api key directly by calling 
 
-TODO 
+```java
+KocomojoSDK.getInstance().validateApiKey(new KocomojoSDK.ValidateApiKeyHandler() {
+    @Override
+    public void onValidated() {
+        Log.d("ApiKey", "Is valid!");
+    }
 
-Alternatively you can also look for an error message in logs.
+    @Override
+    public void onInvalidated() {
+        Log.d("ApiKey", "Is invalid!");
+    }
+});
+```
 
 &nbsp;
 

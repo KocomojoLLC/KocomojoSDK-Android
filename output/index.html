@@ -69,9 +69,17 @@ KocomojoSDK
   .setRadiusInMiles(<span class="hljs-number">17.0</span>)
   .setShowPushNotifications(<span class="hljs-keyword">true</span>);</code></pre><h3 id="api-key-validation"><a class="header-link" href="#api-key-validation"></a>API Key validation</h3>
 <p>You can validate your api key directly by calling </p>
-<p>TODO </p>
-<p>Alternatively you can also look for an error message in logs.</p>
-<p>&nbsp;</p>
+<pre class="hljs"><code>KocomojoSDK.getInstance().validateApiKey(<span class="hljs-keyword">new</span> KocomojoSDK.ValidateApiKeyHandler() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onValidated</span><span class="hljs-params">()</span> </span>{
+        Log.d(<span class="hljs-string">"ApiKey"</span>, <span class="hljs-string">"Is valid!"</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInvalidated</span><span class="hljs-params">()</span> </span>{
+        Log.d(<span class="hljs-string">"ApiKey"</span>, <span class="hljs-string">"Is invalid!"</span>);
+    }
+});</code></pre><p>&nbsp;</p>
 <h3 id="auto-show-experiences"><a class="header-link" href="#auto-show-experiences"></a>Auto Show Experiences</h3>
 <p>You can have experiences automatically pop up once the user is within range. </p>
 <p>To do this: </p>
