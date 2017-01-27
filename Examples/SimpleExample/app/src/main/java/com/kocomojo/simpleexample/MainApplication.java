@@ -1,6 +1,7 @@
 package com.kocomojo.simpleexample;
 
 import android.app.Application;
+import com.kocomojo.KocomojoSDK;
 
 /**
  * Created by elijahwindsor on 1/27/17.
@@ -13,16 +14,14 @@ public class MainApplication extends Application {
 
         KocomojoSDK
                 .getInstance()
-                .setApiKey("9lKZWgRmmYn3DmzYjnpVrkvFP396uXnFWIdp5vK27w~DEV")
-                .setRadiusInMiles(17.0)
-                .setMinimumSecondsBetweenPushNotifications(100)
-                .setAutomaticallyShowExperiences(false)
+                .setApiKey("YOUR_API_KEY_HERE")
+                .setRadiusInMiles(15.0)
                 .setShowPushNotifications(true)
                 .setPushNotificationTitle("Kocomojo")
                 .setPushLaunchActivityClass(MainActivity.class)
                 .setPushSmallIcon(R.mipmap.ic_launcher)
-                .setDisabledImageName("button_disabled")
-                .setEnabledImageName("button_enabled");
+                .setDisabledImageName("kocomojo_disabled")
+                .setEnabledImageName("kocomojo_enabled");
     }
 
 }
