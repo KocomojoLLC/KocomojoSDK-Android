@@ -23,6 +23,8 @@
     <li class="sidebar-header-2"><a href="#adding-the-button">Adding the Button</a></li>
     <li class="sidebar-header-2"><a href="#location-permissions">Location Permissions</a></li>
     <li class="sidebar-header-2"><a href="#local-push-notifications">Local Push Notifications</a></li>
+    <li class="sidebar-header-3"><a href="#title">Title</a></li>
+    <li class="sidebar-header-3"><a href="#icon">Icon</a></li>
     <li class="sidebar-header-3"><a href="#frequency">Frequency</a></li>
     <li class="sidebar-header-3"><a href="#push-templates">Push Templates</a></li>
     <li class="sidebar-header-2"><a href="#notification-listener">Notification Listener</a></li>
@@ -107,10 +109,16 @@ an enabled and disabled image to it: </p>
 <pre class="hljs"><code>KocomojoSDK.getInstance()
   .setPushLaunchActivityClass(MainActivity.class)  <span class="hljs-comment">// set it to the class of the Activity that contains the button </span>
   .setShowPushNotifications(<span class="hljs-keyword">true</span>);</code></pre><p>&nbsp;</p>
-<h3 id="frequency"><a class="header-link" href="#frequency"></a>Frequency</h3>
+<h3 id="title"><a class="header-link" href="#title"></a>Title</h3>
+<p>TO set the title of Push Notifications, use <code>setPushNotificationTitle</code>: </p>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setPushNotificationTitle(<span class="hljs-string">"Your Title"</span>);</code></pre><h3 id="icon"><a class="header-link" href="#icon"></a>Icon</h3>
+<p>To set the icon of Push Notifications, use <code>setPushSmallIcon</code>:</p>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setPushSmallIcon(R.mipmap.ic_launcher);</code></pre><h3 id="frequency"><a class="header-link" href="#frequency"></a>Frequency</h3>
 <p>You change the frequency of push notifications - how many seconds will need to pass after a push notification for another one to occur.  (Any notifications that would occur during this time is ignored as to not overwhelm the client.)  This defaults to 60 &#42; 60 &#42; 2 = 3600, or 2 hours.</p>
 <pre class="hljs"><code>KocomojoSDK.getInstance()
-  .setMinimumSecondsBetweenPushNotifications();</code></pre><p>&nbsp;</p>
+  .setMinimumSecondsBetweenPushNotifications(<span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">2</span>);</code></pre><p>&nbsp;</p>
 <h3 id="push-templates"><a class="header-link" href="#push-templates"></a>Push Templates</h3>
 <p>There are 2 templates that can be customized by the client.  One is for <code>pushTemplateSingular</code> (when there&#39;s one Experience in range) and the other is <code>pushTemplatePlural</code> (when there&#39;s more than one Experience in range.)</p>
 <p>They can be assigned like:</p>

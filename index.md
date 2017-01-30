@@ -146,6 +146,24 @@ KocomojoSDK.getInstance()
 
 &nbsp;
 
+### Title 
+
+TO set the title of Push Notifications, use `setPushNotificationTitle`: 
+
+```java 
+KocomojoSDK.getInstance()
+  .setPushNotificationTitle("Your Title");
+```
+
+### Icon 
+
+To set the icon of Push Notifications, use `setPushSmallIcon`:
+
+```java 
+KocomojoSDK.getInstance()
+  .setPushSmallIcon(R.mipmap.ic_launcher);
+```
+
 
 ### Frequency
 
@@ -153,7 +171,7 @@ You change the frequency of push notifications - how many seconds will need to p
 
 ```java 
 KocomojoSDK.getInstance()
-  .setMinimumSecondsBetweenPushNotifications();
+  .setMinimumSecondsBetweenPushNotifications(60 * 60 * 2);
 ```
 
 &nbsp;
