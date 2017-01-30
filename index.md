@@ -22,7 +22,7 @@ Add KocomojoSDK as a dependency:
 
 ```ruby
 dependencies {
-  compile 'com.kocomojo:kocomojo-sdk:0.9.822'
+  compile 'com.kocomojo:kocomojo-sdk:0.9.823'
 }
 ```
 
