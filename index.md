@@ -148,21 +148,35 @@ KocomojoSDK.getInstance()
 
 ### Title 
 
-TO set the title of Push Notifications, use `setPushNotificationTitle`: 
+To set the title of Push Notifications, use `setPushNotificationTitle`: 
 
 ```java 
 KocomojoSDK.getInstance()
   .setPushNotificationTitle("Your Title");
 ```
 
-### Icon 
+&nbsp;
 
-To set the icon of Push Notifications, use `setPushSmallIcon`:
+### Small and Large Icons
+
+To set the small icon of Push Notifications, use `setPushSmallIcon`:
 
 ```java 
 KocomojoSDK.getInstance()
-  .setPushSmallIcon(R.mipmap.ic_launcher);
+  .setPushSmallIcon(R.mipmap.ic_small);
 ```
+
+&nbsp;
+
+To set the large icon of Push Notifications, use `setPushLargeIcon`.  This takes a `Bitmap`, for example:
+
+```java
+Bitmap icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+
+KocomojoSDK.getInstance()
+  .setPushLargeIcon(icon)
+```
+&nbsp;
 
 
 ### Frequency

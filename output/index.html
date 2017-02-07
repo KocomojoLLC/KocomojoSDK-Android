@@ -24,7 +24,7 @@
     <li class="sidebar-header-2"><a href="#location-permissions">Location Permissions</a></li>
     <li class="sidebar-header-2"><a href="#local-push-notifications">Local Push Notifications</a></li>
     <li class="sidebar-header-3"><a href="#title">Title</a></li>
-    <li class="sidebar-header-3"><a href="#icon">Icon</a></li>
+    <li class="sidebar-header-3"><a href="#small-and-large-icons">Small and Large Icons</a></li>
     <li class="sidebar-header-3"><a href="#frequency">Frequency</a></li>
     <li class="sidebar-header-3"><a href="#push-templates">Push Templates</a></li>
     <li class="sidebar-header-2"><a href="#notification-listener">Notification Listener</a></li>
@@ -110,12 +110,19 @@ an enabled and disabled image to it: </p>
   .setPushLaunchActivityClass(MainActivity.class)  <span class="hljs-comment">// set it to the class of the Activity that contains the button </span>
   .setShowPushNotifications(<span class="hljs-keyword">true</span>);</code></pre><p>&nbsp;</p>
 <h3 id="title"><a class="header-link" href="#title"></a>Title</h3>
-<p>TO set the title of Push Notifications, use <code>setPushNotificationTitle</code>: </p>
+<p>To set the title of Push Notifications, use <code>setPushNotificationTitle</code>: </p>
 <pre class="hljs"><code>KocomojoSDK.getInstance()
-  .setPushNotificationTitle(<span class="hljs-string">"Your Title"</span>);</code></pre><h3 id="icon"><a class="header-link" href="#icon"></a>Icon</h3>
-<p>To set the icon of Push Notifications, use <code>setPushSmallIcon</code>:</p>
+  .setPushNotificationTitle(<span class="hljs-string">"Your Title"</span>);</code></pre><p>&nbsp;</p>
+<h3 id="small-and-large-icons"><a class="header-link" href="#small-and-large-icons"></a>Small and Large Icons</h3>
+<p>To set the small icon of Push Notifications, use <code>setPushSmallIcon</code>:</p>
 <pre class="hljs"><code>KocomojoSDK.getInstance()
-  .setPushSmallIcon(R.mipmap.ic_launcher);</code></pre><h3 id="frequency"><a class="header-link" href="#frequency"></a>Frequency</h3>
+  .setPushSmallIcon(R.mipmap.ic_small);</code></pre><p>&nbsp;</p>
+<p>To set the large icon of Push Notifications, use <code>setPushLargeIcon</code>.  This takes a <code>Bitmap</code>, for example:</p>
+<pre class="hljs"><code>Bitmap icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+
+KocomojoSDK.getInstance()
+  .setPushLargeIcon(icon)</code></pre><p>&nbsp;</p>
+<h3 id="frequency"><a class="header-link" href="#frequency"></a>Frequency</h3>
 <p>You change the frequency of push notifications - how many seconds will need to pass after a push notification for another one to occur.  (Any notifications that would occur during this time is ignored as to not overwhelm the client.)  This defaults to 60 &#42; 60 &#42; 2 = 3600, or 2 hours.</p>
 <pre class="hljs"><code>KocomojoSDK.getInstance()
   .setMinimumSecondsBetweenPushNotifications(<span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">2</span>);</code></pre><p>&nbsp;</p>
