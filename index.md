@@ -80,6 +80,11 @@ KocomojoSDK.getInstance().validateApiKey(new KocomojoSDK.ValidateApiKeyHandler()
     public void onInvalidated() {
         Log.d("ApiKey", "Is invalid!");
     }
+
+    @Override
+    public void onError(String message) {
+        Log.d("ApiKey", "Validation error: " + message);
+    }
 });
 ```
 

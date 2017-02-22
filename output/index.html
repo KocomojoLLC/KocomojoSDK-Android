@@ -81,6 +81,11 @@ KocomojoSDK
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInvalidated</span><span class="hljs-params">()</span> </span>{
         Log.d(<span class="hljs-string">"ApiKey"</span>, <span class="hljs-string">"Is invalid!"</span>);
     }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(String message)</span> </span>{
+        Log.d(<span class="hljs-string">"ApiKey"</span>, <span class="hljs-string">"Validation error: "</span> + message);
+    }
 });</code></pre><p>&nbsp;</p>
 <h3 id="auto-show-experiences"><a class="header-link" href="#auto-show-experiences"></a>Auto Show Experiences</h3>
 <p>You can have experiences automatically pop up once the user is within range. </p>
