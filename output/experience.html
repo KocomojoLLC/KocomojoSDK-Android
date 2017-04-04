@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>KocomojoSDK for iOS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+  </head>
+<body>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="col-xs-3"><ul class="nav nav-list" style="height:100%;overflow-y:scroll;">
+    <li class="sidebar-header-1"><a href="#kocomojosdk-for-ios">KocomojoSDK for iOS</a></li>
+    <li class="sidebar-header-2"><a href="#using-kocomojoexperience">Using KocomojoExperience</a></li>
+    <li class="sidebar-header-2"><a href="#back-button">Back Button</a></li>
+    <li class="sidebar-header-2"><a href="#location-permissions">Location Permissions</a></li>
+    <li class="sidebar-header-3"><a href="#title">Title</a></li>
+    <li class="sidebar-header-3"><a href="#small-and-large-icons">Small and Large Icons</a></li>
+    <li class="sidebar-header-3"><a href="#frequency">Frequency</a></li>
+    <li class="sidebar-header-3"><a href="#push-templates">Push Templates</a></li>
+    <li class="sidebar-header-2"><a href="#notification-listener">Notification Listener</a></li>
+    <li class="sidebar-header-3"><a href="#onmainexperienceready">onMainExperienceReady</a></li>
+    <li class="sidebar-header-3"><a href="#onexperiencesinrange">onExperiencesInRange</a></li>
+    <li class="sidebar-header-3"><a href="#onbluetoothdisabled">onBluetoothDisabled</a></li>
+</ul>        </div>
+      </div>
+      <div class="col-xs-9 main"><p><a href="#" onClick="javascript:window.history.back();">&lt; Back</a></p>
+<h1 id="kocomojosdk-for-ios"><a class="header-link" href="#kocomojosdk-for-ios"></a>KocomojoSDK for iOS</h1>
+<h2 id="using-kocomojoexperience"><a class="header-link" href="#using-kocomojoexperience"></a>Using KocomojoExperience</h2>
+<p>Inside of the layout for the <em>Activity</em> add this fragment -- it will need to take up the whole viewing area: </p>
+<pre class="hljs"><code>    <span class="hljs-tag">&lt;<span class="hljs-name">fragment</span>
+        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>
+        <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.kocomojo.SdkExperience"</span>
+        <span class="hljs-attr">android:layout_alignParentTop</span>=<span class="hljs-string">"true"</span>
+        <span class="hljs-attr">android:layout_alignParentLeft</span>=<span class="hljs-string">"true"</span>
+        <span class="hljs-attr">android:layout_alignParentStart</span>=<span class="hljs-string">"true"</span>
+        <span class="hljs-attr">android:layout_marginLeft</span>=<span class="hljs-string">"0dp"</span>
+        <span class="hljs-attr">android:layout_marginStart</span>=<span class="hljs-string">"0dp"</span>
+        <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"0dp"</span>
+        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fragment"</span> /&gt;</span></code></pre><p>&nbsp;</p>
+<h2 id="back-button"><a class="header-link" href="#back-button"></a>Back Button</h2>
+<p>Add this to forward key presses to KocomojoSDK -- this is used mainly for the Back Button: </p>
+<pre class="hljs"><code><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onKeyDown</span><span class="hljs-params">(<span class="hljs-keyword">int</span> keyCode, KeyEvent keyEvent)</span> </span>{
+    <span class="hljs-keyword">return</span> KocomojoSDK.getInstance().onKeyDown(keyCode, keyEvent);
+}</code></pre><p>&nbsp;</p>
+<h2 id="location-permissions"><a class="header-link" href="#location-permissions"></a>Location Permissions</h2>
+<p>Add this line to let KocomjoSDK know the results of it asking for permission to access location in the activity that contains the button: </p>
+<pre class="hljs"><code><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onRequestPermissionsResult</span><span class="hljs-params">(<span class="hljs-keyword">int</span> requestCode, String[] permissions, <span class="hljs-keyword">int</span>[] grantResults)</span> </span>{
+  KocomojoSDK.onRequestPermissionsResult(requestCode, permissions, grantResults);
+}</code></pre><p>&nbsp;</p>
+<h3 id="title"><a class="header-link" href="#title"></a>Title</h3>
+<p>To set the title of Push Notifications, use <code>setPushNotificationTitle</code>: </p>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setPushNotificationTitle(<span class="hljs-string">"Your Title"</span>);</code></pre><p>&nbsp;</p>
+<h3 id="small-and-large-icons"><a class="header-link" href="#small-and-large-icons"></a>Small and Large Icons</h3>
+<p>To set the small icon of Push Notifications, use <code>setPushSmallIcon</code>:</p>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setPushSmallIcon(R.mipmap.ic_small);</code></pre><p>&nbsp;</p>
+<p>To set the large icon of Push Notifications, use <code>setPushLargeIcon</code>.  This takes a <code>Bitmap</code>, for example:</p>
+<pre class="hljs"><code>Bitmap icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+
+KocomojoSDK.getInstance()
+  .setPushLargeIcon(icon)</code></pre><p>&nbsp;</p>
+<h3 id="frequency"><a class="header-link" href="#frequency"></a>Frequency</h3>
+<p>You change the frequency of push notifications - how many seconds will need to pass after a push notification for another one to occur.  (Any notifications that would occur during this time is ignored as to not overwhelm the client.)  This defaults to 60 &#42; 60 &#42; 2 = 3600, or 2 hours.</p>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setMinimumSecondsBetweenPushNotifications(<span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">2</span>);</code></pre><p>&nbsp;</p>
+<h3 id="push-templates"><a class="header-link" href="#push-templates"></a>Push Templates</h3>
+<p>There are 2 templates that can be customized by the client.  One is for <code>pushTemplateSingular</code> (when there&#39;s one Experience in range) and the other is <code>pushTemplatePlural</code> (when there&#39;s more than one Experience in range.)</p>
+<p>They can be assigned like:</p>
+<pre class="hljs"><code>KocomojoSDK.getInstance()
+  .setPushTemplateSingular(<span class="hljs-string">"An awesome experience __NAME__ has just entered your sphere"</span>)
+  .setPushTemplatePlural(<span class="hljs-string">"__NAMES__ are all available!"</span>);</code></pre><p>&nbsp;</p>
+<h2 id="notification-listener"><a class="header-link" href="#notification-listener"></a>Notification Listener</h2>
+<pre class="hljs"><code>KocomjoSDK.getInstance()
+  .setNotificationListener(<span class="hljs-keyword">new</span> KocomojoSDK.ExperienceNotificationListener() {
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMainExperienceReady</span><span class="hljs-params">(Boolean isCached)</span> </span>{
+          Log.d(<span class="hljs-string">"MainApplication"</span>, <span class="hljs-string">"Main experience ready "</span> + isCached);
+
+          <span class="hljs-keyword">if</span>(isCached) {  <span class="hljs-comment">// it's loaded, but not from server -- from cache </span>
+
+          } <span class="hljs-keyword">else</span> { <span class="hljs-comment">// freshly loaded from server</span>
+
+          }
+      }
+
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onExperiencesInRange</span><span class="hljs-params">(ArrayList experiencesList)</span> </span>{
+          Log.d(<span class="hljs-string">"MainApplication"</span>, <span class="hljs-string">"Experiences in range "</span> + experiencesList.toString());
+      }
+
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onBluetoothDisabled</span><span class="hljs-params">()</span> </span>{
+          Log.d(<span class="hljs-string">"MainApplication"</span>, <span class="hljs-string">"Bluetooth Disabled!"</span>);
+      }
+})</code></pre><p> &nbsp;</p>
+<h3 id="onmainexperienceready"><a class="header-link" href="#onmainexperienceready"></a>onMainExperienceReady</h3>
+<p>This will be called once on initial app launch, and twice on every other launch.  One the first launch it will be called with <code>isCached</code> as false, as it would have just loaded the main experience from the server.</p>
+<p>On every other launch it will be called once with <code>isCached</code> as true.  After it receives data from the server, it will be called again with <code>isCached</code> as false. </p>
+<p>When coming back to the app from the background it will also be called with <code>isCached</code> as false when it retrieves data from the server again.  </p>
+<p>This can be useful if you have an overlay on top of the Fragment that you want to show until data is ready. </p>
+<h3 id="onexperiencesinrange"><a class="header-link" href="#onexperiencesinrange"></a>onExperiencesInRange</h3>
+<p>When experiences come in range (or go out of range) this will be posted.</p>
+<h3 id="onbluetoothdisabled"><a class="header-link" href="#onbluetoothdisabled"></a>onBluetoothDisabled</h3>
+<p>This is called if the user launches the app with Bluetooth disabled, or if they disable Bluetooth while in the app.</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>
