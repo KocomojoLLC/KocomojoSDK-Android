@@ -6,23 +6,25 @@
 
 ### Repositories
 
-Add KocomojoSDK Android Maven repository to your `build.gradle` file: 
+Add `jitpack.io` and KocomojoSDK Android Maven repository to your `build.gradle` file:
 
 ```ruby
 repositories {
+
+  maven { url 'https://jitpack.io' }
   maven {
       url 'https://raw.githubusercontent.com/KocomojoLLC/KocomojoSDK-Android/master'
   }
 }
 ```
 
-### Dependencies 
+### Dependencies
 
-Add KocomojoSDK as a dependency: 
+Add KocomojoSDK as a dependency:
 
 ```ruby
 dependencies {
-  compile 'com.kocomojo:kocomojo-sdk:0.9.824'
+  compile 'com.kocomojo:kocomojo-sdk:0.9.864'
 }
 ```
 
@@ -30,9 +32,9 @@ Then simply run `gradle` to install KocomojoSDK into your project.
 
 &nbsp;
 
-### 32-Bit 
+### 32-Bit
 
-Currently KocomojoSDK only supports 32-bit libraries.  To ensure compatibility, you'll need to ensure it only uses 32-bit libraries: 
+Currently KocomojoSDK only supports 32-bit libraries.  To ensure compatibility, you'll need to ensure it only uses 32-bit libraries:
 
 ```ruby
 android {
@@ -46,13 +48,13 @@ android {
 }
 ```
 
-## Implementation 
+## Implementation
 
 Import `KocomojoSDK` into your `MainApplication.java`:
 
 `import com.kocomojo.KocomojoSDK;`
 
-Add these lines to `onCreate()`: 
+Add these lines to `onCreate()`:
 
 ```java
 KocomojoSDK.setApplication(this);
@@ -67,7 +69,7 @@ KocomojoSDK
 
 ### API Key validation
 
-You can validate your api key directly by calling 
+You can validate your api key directly by calling
 
 ```java
 KocomojoSDK.getInstance().validateApiKey(new KocomojoSDK.ValidateApiKeyHandler() {
@@ -94,7 +96,7 @@ KocomojoSDK.getInstance().validateApiKey(new KocomojoSDK.ValidateApiKeyHandler()
 
 &nbsp;
 
-The user can enter KocomojoSDK's interface either via an Experience or a Button.  Only one of the two can exist per app. 
+The user can enter KocomojoSDK's interface either via an Experience or a Button.  Only one of the two can exist per app.
 
 If the entire app is based on KocmomojoSDK (i.e. the first thing the user would see would be a screen designed in the editor), then you'd want to use `KocomojoExperience`.  
 
@@ -102,7 +104,7 @@ If the app has existing functionality outside of KocomojoSDK, then your app will
 
 &nbsp;
 
-<a href="/experience.html" style="font-size: 2em;">Go to Experience Docs</a> <span style="font-size: 2em;">&nbsp;|&nbsp;</span> 
+<a href="/experience.html" style="font-size: 2em;">Go to Experience Docs</a> <span style="font-size: 2em;">&nbsp;|&nbsp;</span>
 <a href="/button.html" style="font-size: 2em;">Go to Button Docs</a>
 
 &nbsp;
