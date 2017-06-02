@@ -26,19 +26,21 @@
 <h2 id="installation"><a class="header-link" href="#installation"></a>Installation</h2>
 <p>&nbsp;</p>
 <h3 id="repositories"><a class="header-link" href="#repositories"></a>Repositories</h3>
-<p>Add KocomojoSDK Android Maven repository to your <code>build.gradle</code> file: </p>
+<p>Add <code>jitpack.io</code> and KocomojoSDK Android Maven repository to your <code>build.gradle</code> file:</p>
 <pre class="hljs"><code>repositories {
+
+  maven { url <span class="hljs-string">'https://jitpack.io'</span> }
   maven {
       url <span class="hljs-string">'https://raw.githubusercontent.com/KocomojoLLC/KocomojoSDK-Android/master'</span>
   }
 }</code></pre><h3 id="dependencies"><a class="header-link" href="#dependencies"></a>Dependencies</h3>
-<p>Add KocomojoSDK as a dependency: </p>
+<p>Add KocomojoSDK as a dependency:</p>
 <pre class="hljs"><code>dependencies {
-  compile <span class="hljs-string">'com.kocomojo:kocomojo-sdk:0.9.824'</span>
+  compile <span class="hljs-string">'com.kocomojo:kocomojo-sdk:0.9.864'</span>
 }</code></pre><p>Then simply run <code>gradle</code> to install KocomojoSDK into your project.  </p>
 <p>&nbsp;</p>
 <h3 id="32-bit"><a class="header-link" href="#32-bit"></a>32-Bit</h3>
-<p>Currently KocomojoSDK only supports 32-bit libraries.  To ensure compatibility, you&#39;ll need to ensure it only uses 32-bit libraries: </p>
+<p>Currently KocomojoSDK only supports 32-bit libraries.  To ensure compatibility, you&#39;ll need to ensure it only uses 32-bit libraries:</p>
 <pre class="hljs"><code>android {
   ...
   defaultConfig {
@@ -50,7 +52,7 @@
 }</code></pre><h2 id="implementation"><a class="header-link" href="#implementation"></a>Implementation</h2>
 <p>Import <code>KocomojoSDK</code> into your <code>MainApplication.java</code>:</p>
 <p><code>import com.kocomojo.KocomojoSDK;</code></p>
-<p>Add these lines to <code>onCreate()</code>: </p>
+<p>Add these lines to <code>onCreate()</code>:</p>
 <pre class="hljs"><code>KocomojoSDK.setApplication(<span class="hljs-keyword">this</span>);
 
 KocomojoSDK
@@ -58,7 +60,7 @@ KocomojoSDK
   .setApiKey(<span class="hljs-string">"YOUR_API_KEY_HERE"</span>)
   .setRadiusInMiles(<span class="hljs-number">17.0</span>)
   .setShowPushNotifications(<span class="hljs-keyword">true</span>);</code></pre><h3 id="api-key-validation"><a class="header-link" href="#api-key-validation"></a>API Key validation</h3>
-<p>You can validate your api key directly by calling </p>
+<p>You can validate your api key directly by calling</p>
 <pre class="hljs"><code>KocomojoSDK.getInstance().validateApiKey(<span class="hljs-keyword">new</span> KocomojoSDK.ValidateApiKeyHandler() {
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onValidated</span><span class="hljs-params">()</span> </span>{
@@ -77,11 +79,11 @@ KocomojoSDK
 });</code></pre><p>&nbsp;</p>
 <h1 id="experience-or-button"><a class="header-link" href="#experience-or-button"></a>Experience Or Button</h1>
 <p>&nbsp;</p>
-<p>The user can enter KocomojoSDK&#39;s interface either via an Experience or a Button.  Only one of the two can exist per app. </p>
+<p>The user can enter KocomojoSDK&#39;s interface either via an Experience or a Button.  Only one of the two can exist per app.</p>
 <p>If the entire app is based on KocmomojoSDK (i.e. the first thing the user would see would be a screen designed in the editor), then you&#39;d want to use <code>KocomojoExperience</code>.  </p>
 <p>If the app has existing functionality outside of KocomojoSDK, then your app will use <code>KocomojoButton</code> as it&#39;s entry point.</p>
 <p>&nbsp;</p>
-<p><a href="/experience.html" style="font-size: 2em;">Go to Experience Docs</a> <span style="font-size: 2em;">&nbsp;|&nbsp;</span> 
+<p><a href="/experience.html" style="font-size: 2em;">Go to Experience Docs</a> <span style="font-size: 2em;">&nbsp;|&nbsp;</span>
 <a href="/button.html" style="font-size: 2em;">Go to Button Docs</a></p>
 <p>&nbsp;</p>
       </div>
