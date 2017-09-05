@@ -80,5 +80,11 @@
       <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.apptailor</groupId>
+      <artifactId>react-native-workers</artifactId>
+      <version>0.3.1</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>
