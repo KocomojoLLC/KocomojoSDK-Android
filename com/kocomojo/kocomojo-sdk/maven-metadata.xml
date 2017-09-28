@@ -3,7 +3,7 @@
   <groupId>com.kocomojo</groupId>
   <artifactId>kocomojo-sdk</artifactId>
   <versioning>
-    <release>0.9.887</release>
+    <release>0.9.888</release>
     <versions>
       <version>1.0.0</version>
       <version>0.9.715</version>
@@ -41,7 +41,8 @@
       <version>0.9.885</version>
       <version>0.9.886</version>
       <version>0.9.887</version>
+      <version>0.9.888</version>
     </versions>
-    <lastUpdated>20170926174816</lastUpdated>
+    <lastUpdated>20170928151302</lastUpdated>
   </versioning>
 </metadata>
