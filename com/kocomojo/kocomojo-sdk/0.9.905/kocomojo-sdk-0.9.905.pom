@@ -81,9 +81,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.apptailor</groupId>
-      <artifactId>react-native-workers</artifactId>
-      <version>0.3.1</version>
+      <groupId>com.wkh237</groupId>
+      <artifactId>react-native-fetch-blob</artifactId>
+      <version>0.10.8</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
