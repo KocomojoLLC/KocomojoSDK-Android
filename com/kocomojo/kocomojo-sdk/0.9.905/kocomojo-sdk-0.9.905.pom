@@ -10,7 +10,7 @@
     <dependency>
       <groupId>com.github.rebeccahughes</groupId>
       <artifactId>react-native-device-info</artifactId>
-      <version>12c93cbe</version>
+      <version>v0.15.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
